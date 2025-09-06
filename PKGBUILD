@@ -18,14 +18,4 @@ package() {
     ln -sf discord-launcher.sh "$pkgdir/usr/bin/discord"
 }
 
-post_install() {
-    cat <<EOF
-Important:
-Run the launcher once manually to initialize Discord:
-    $ /usr/bin/discord-launcher.sh
-  -or-
-    $ /usr/bin/discord
-This will download Discord and set up your configuration and desktop entry.
 
-EOF
-}

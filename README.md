@@ -1,17 +1,21 @@
 # Discord Launcher
 
-**Discord Launcher** is a userland updater and launcher for Discord on Linux. It keeps your Discord installation up-to-date automatically and manages configuration in the user space.
+**Discord Launcher** is a userland updater/launcher script for Discord on Linux. It keeps your Discord installation up-to-date without requiring root privileges or waiting for distribution packages to catch up.
+
+---
 
 ## Features
 
-* Automatically downloads and updates Discord.
-* Keeps everything in userland (\~/.discord-bin and \~/.config/discord).
-* Optional lid monitoring to automatically kill/relaunch Discord when your laptop lid is closed/opened.
-* Lightweight and portable Bash script.
+* Automatically downloads the latest Discord release.
+* Keeps Discord updated in userland (`~/.discord-bin`).
+* Optional lid-state monitoring to kill/relaunch Discord on laptop lid events.
+* Installs a desktop entry for easy launching from your application menu.
+  ** NOTE:  User must run once to finish installation. 
+---
 
-## Installation
+## Installation (Arch Linux / Manjaro)
 
-Using the provided PKGBUILD for Arch Linux:
+Build and install the package with `makepkg`:
 
 ```bash
 git clone https://github.com/onemyndseye/discord-launcher.git
@@ -19,35 +23,65 @@ cd discord-launcher
 makepkg -si
 ```
 
-## Usage
+> The package provides `discord` and `discord-launcher` commands.
 
-Launch Discord via:
+---
+
+## First Run
+
+After installation, run the launcher manually at least once to initialize Discord:
 
 ```bash
-discord-launcher.sh
-# or simply
+discord-launcher
+# or
 discord
 ```
 
-### Options
+This will download Discord into `~/.discord-bin` and set up your configuration and desktop entry.
 
-* `--help` : Show help message.
-* `--checklid` : Enable lid state monitoring.
-* `--nochecklid` : Disable lid state monitoring.
+---
 
 ## Configuration
 
-A basic config file is created at `~/.config/discord/discord-launcher.conf`:
+A default configuration file will be created at `~/.config/discord/discord-launcher.conf`.
+
+Example options:
 
 ```bash
-# Kill/relaunch Discord based on lid state
+# Enable lid-state monitoring (yes/no)
 CHECK_LID=no
+
 # Path to lid state file
 LID_PATH=/proc/acpi/button/lid/LID0/state
 ```
 
-You can edit these options to suit your preferences.
+---
+
+## Usage
+
+* Launch Discord normally:
+
+```bash
+discord
+# or
+discord-launcher
+```
+
+* Override lid monitoring temporarily:
+
+```bash
+discord-launcher --checklid   # enable lid monitoring for this session
+discord-launcher --nochecklid # disable lid monitoring for this session
+```
+
+* Show help:
+
+```bash
+discord-launcher --help
+```
+
+---
 
 ## License
 
-MIT License – see [LICENSE](LICENSE) for details.
+MIT License
