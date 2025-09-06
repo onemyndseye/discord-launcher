@@ -112,7 +112,7 @@ case "$1" in
     --update)
         # Monitor lid state
         FORCEUPDATE=1
-        checkupdate
+        check_update
         ;;
     "")
         ;;  # no option → normal behavior
