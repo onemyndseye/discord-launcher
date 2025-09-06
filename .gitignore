@@ -1,6 +1,10 @@
-# Ignore built packages
+# Ignore built packages and artifacts
 *.pkg.tar.*
 *.pkg.tar.zst
+pkg/
+src/
+
+
 
 # Ignore logs
 *.log
