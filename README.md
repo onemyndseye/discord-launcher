@@ -32,8 +32,8 @@ makepkg -si
 After installation, run the launcher manually at least once to initialize Discord:
 
 ```bash
-discord-launcher
-# or
+discord-launcher.sh
+ or
 discord
 ```
 
