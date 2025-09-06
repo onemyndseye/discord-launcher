@@ -35,6 +35,7 @@ mkdir -p "$DISCORD_CFG"
 cd $DISCORD_CFG
 
 VER_CHK=$(ls |grep "$version")
+[ -n "$FORCEUPDATE" ] && VER_CHK=""
 if [ -z "$VER_CHK" ]; then
   # Discord is out of date. Lets update
   TMP=$(mktemp -d)
@@ -107,6 +108,11 @@ case "$1" in
     --nochecklid)
         # Monitor lid state
         CHECK_LID=no
+        ;;
+    --update)
+        # Monitor lid state
+        FORCEUPDATE=1
+        checkupdate
         ;;
     "")
         ;;  # no option → normal behavior
