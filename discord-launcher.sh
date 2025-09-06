@@ -60,6 +60,7 @@ if [ -z "$VER_CHK" ]; then
   # Install the desktop file
   mkdir -p ~/.local/share/applications
   cp discord.desktop ~/.local/share/applications/
+  xdg-desktop-menu forceupdate
 fi
 }
 
@@ -113,6 +114,9 @@ case "$1" in
         # Monitor lid state
         FORCEUPDATE=1
         check_update
+        echo ""
+        echo "Discord is ready to launch!"
+        exit 0
         ;;
     "")
         ;;  # no option → normal behavior
