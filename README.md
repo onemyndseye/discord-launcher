@@ -1,87 +1,71 @@
 # Discord Launcher
 
-**Discord Launcher** is a userland updater/launcher script for Discord on Linux. It keeps your Discord installation up-to-date without requiring root privileges or waiting for distribution packages to catch up.
+A simple userland Discord updater/launcher script for Linux.\
+This script automatically downloads, installs, and updates Discord
+without relying on system packages.
 
----
+------------------------------------------------------------------------
 
 ## Features
 
-* Automatically downloads the latest Discord release.
-* Keeps Discord updated in userland (`~/.discord-bin`).
-* Optional lid-state monitoring to kill/relaunch Discord on laptop lid events.
-* Installs a desktop entry for easy launching from your application menu.
-  ** NOTE:  User must run once to finish installation. 
----
+-   Always downloads the latest official Discord release
+-   Keeps binaries isolated in `~/.discord-bin`
+-   Stores configuration in `~/.config/discord`
+-   Creates a `.desktop` entry for menu integration
+-   Optional lid-state monitoring (kill/restart on laptop lid
+    open/close)
 
-## Installation (Arch Linux / Manjaro)
+------------------------------------------------------------------------
 
-Build and install the package with `makepkg`:
+## Installation
 
-```bash
+### Arch Linux / Manjaro (via `makepkg`)
+
+``` bash
 git clone https://github.com/onemyndseye/discord-launcher.git
 cd discord-launcher
 makepkg -si
 ```
 
-> The package provides `discord` and `discord-launcher` commands.
+### Other Linux Distributions
 
----
-
-## First Run
-
-After installation, run the launcher manually at least once to initialize Discord:
-
-```bash
-discord-launcher.sh
- or
-discord
+``` bash
+git clone https://github.com/onemyndseye/discord-launcher.git
+cd discord-launcher
+chmod +x discord-launcher.sh
+./discord-launcher.sh
 ```
 
-This will download Discord into `~/.discord-bin` and set up your configuration and desktop entry.
-
----
-
-## Configuration
-
-A default configuration file will be created at `~/.config/discord/discord-launcher.conf`.
-
-Example options:
-
-```bash
-# Enable lid-state monitoring (yes/no)
-CHECK_LID=no
-
-# Path to lid state file
-LID_PATH=/proc/acpi/button/lid/LID0/state
-```
-
----
+------------------------------------------------------------------------
 
 ## Usage
 
-* Launch Discord normally:
-
-```bash
-discord
-# or
-discord-launcher
+``` bash
+discord-launcher.sh [OPTION]
 ```
 
-* Override lid monitoring temporarily:
+Options: - `--help` Show help message - `--update` Force update
+Discord - `--checklid` Enable lid-state monitoring - `--nochecklid`
+Disable lid-state monitoring
 
-```bash
-discord-launcher --checklid   # enable lid monitoring for this session
-discord-launcher --nochecklid # disable lid monitoring for this session
-```
+------------------------------------------------------------------------
 
-* Show help:
+## Notes
 
-```bash
-discord-launcher --help
-```
+-   On first run, the script downloads Discord and sets up a desktop
+    entry.
 
----
+-   If the menu entry doesn't show up immediately, log out and back in,
+    or run:
+
+    ``` bash
+    xdg-desktop-menu forceupdate
+    ```
+
+-   Config is stored in `~/.config/discord/discord-launcher.conf`.
+
+------------------------------------------------------------------------
 
 ## License
 
-MIT License
+MIT
