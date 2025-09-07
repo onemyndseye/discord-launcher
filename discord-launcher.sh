@@ -60,7 +60,7 @@ if [ -z "$VER_CHK" ]; then
   # Install the desktop file
   mkdir -p ~/.local/share/applications
   cp discord.desktop ~/.local/share/applications/
-  xdg-desktop-menu forceupdate
+  command -v xdg-desktop-menu >/dev/null 2>&1 && xdg-desktop-menu forceupdate
 fi
 }
 
@@ -91,6 +91,7 @@ Usage: $0 [OPTION]
 Options:
   --help        Show this help message and exit
   --ignorelid   Launch Discord without monitoring lid state
+  --update      Force a update and exit
 EOF
 }
 
